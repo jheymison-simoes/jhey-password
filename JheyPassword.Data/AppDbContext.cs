@@ -7,11 +7,11 @@ namespace JheyPassword.Data;
 
 public class AppDbContext : DbContext
 {
-    private string _dbPath { get; set; }
-
+    private string _path;
+    
     public AppDbContext()
     {
-        _dbPath = Path.Combine(FileSystem.AppDataDirectory, "app2.db");
+        _path = Path.Combine(AppContext.BaseDirectory, "app2.db");
     }
     
     public DbSet<PasswordEntity> Passwords { get; set; }
@@ -19,10 +19,13 @@ public class AppDbContext : DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.ApplyConfiguration(new PasswordMapping());
+        modelBuilder.Entity<PasswordEntity>(x => x.HasQueryFilter(q => !q.DeletedAt.HasValue));
     }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        optionsBuilder.UseSqlite($"Data Source={_dbPath}");
+        // var path = Path.Combine(Directory.GetCurrentDirectory(), "app2.db");
+        // var path = "app2.db";
+        optionsBuilder.UseSqlite($"Data Source={_path}");
     }
 }

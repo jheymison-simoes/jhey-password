@@ -17,6 +17,7 @@ namespace JheyPassword.Data.Migrations
                 {
                     Id = table.Column<Guid>(type: "TEXT", nullable: false),
                     Title = table.Column<string>(type: "varchar", maxLength: 400, nullable: false),
+                    User = table.Column<string>(type: "varchar", maxLength: 400, nullable: false),
                     Password = table.Column<string>(type: "varchar", maxLength: 400, nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "TEXT", nullable: false),
                     DeletedAt = table.Column<DateTime>(type: "TEXT", nullable: true)

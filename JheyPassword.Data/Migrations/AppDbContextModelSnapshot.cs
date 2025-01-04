@@ -39,6 +39,11 @@ namespace JheyPassword.Data.Migrations
                         .HasMaxLength(400)
                         .HasColumnType("varchar");
 
+                    b.Property<string>("User")
+                        .IsRequired()
+                        .HasMaxLength(400)
+                        .HasColumnType("varchar");
+
                     b.HasKey("Id");
 
                     b.ToTable("password", (string)null);

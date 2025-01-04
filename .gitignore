@@ -455,3 +455,6 @@ $RECYCLE.BIN/
 !.vscode/extensions.json
 
 appsettings.Production.json
+app2.db
+app.db
+*.db

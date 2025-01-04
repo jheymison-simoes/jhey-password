@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace JheyPassword.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250104041201_Initial")]
+    [Migration("20250104203554_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -38,6 +38,11 @@ namespace JheyPassword.Data.Migrations
                         .HasColumnType("varchar");
 
                     b.Property<string>("Title")
+                        .IsRequired()
+                        .HasMaxLength(400)
+                        .HasColumnType("varchar");
+
+                    b.Property<string>("User")
                         .IsRequired()
                         .HasMaxLength(400)
                         .HasColumnType("varchar");

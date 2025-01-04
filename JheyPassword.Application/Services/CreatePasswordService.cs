@@ -11,12 +11,11 @@ public class CreatePasswordService(IMapper mapper, IPasswordRepository passwordR
 {
     public async Task<CreatedPasswordResponse> CreateAsync(CreatePasswordViewModel model)
     {
-        throw new Exception("Teste de erro");
-        
         var password = new PasswordEntity
         {
             Title = model.Title,
-            Password = model.Password
+            Password = model.Password,
+            User = model.UserOrEmail
         };
         
         await passwordRepository.CreateAsync(password);

@@ -22,5 +22,9 @@ public class PasswordMapping : IEntityTypeConfiguration<PasswordEntity>
             .IsRequired()
             .HasColumnType("varchar")
             .HasMaxLength(400);
+        builder.Property(t => t.User)
+            .IsRequired()
+            .HasColumnType("varchar")
+            .HasMaxLength(400);
     }
 }

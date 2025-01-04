@@ -1,28 +1,29 @@
 ﻿using JheyPassword.Business.Interfaces.Services;
-using JheyPassword.Business.Responses;
 using JheyPassword.Components.Pages.Password.Models;
 using Microsoft.AspNetCore.Components;
+using MudBlazor;
 
 namespace JheyPassword.Components.Pages.Password.CreatePassword;
 
 public class CreatePasswordBase : ComponentBase
 {
     [Inject] protected ICreatePasswordService CreatePasswordService { get; set; } = default!;
+    [Inject] protected ISnackbar SnackbarService { get; set; } = default!;
     
     protected CreatePasswordForm CreatePasswordForm { get; set; } = new ();
 
     protected async Task OnSubmitAsync()
     {
-        var response = await CreatePasswordService.CreateAsync(new()
+        await CreatePasswordService.CreateAsync(new()
         {
             Title = CreatePasswordForm.Title,
-            Password = CreatePasswordForm.Password
+            Password = CreatePasswordForm.Password,
+            UserOrEmail = CreatePasswordForm.UserOrEmail
+            
         });
-        
-        // if (response is BaseResponse<CreatedPasswordResponse> baseResponse)
-        // {
-        //     var teste = baseResponse.Error;
-        // }
 
+        SnackbarService.Add("Chave guardada com sucesso!", Severity.Success);
+
+        CreatePasswordForm = new();
     }
 }
