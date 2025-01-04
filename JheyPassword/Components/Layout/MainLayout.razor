@@ -1,0 +1,32 @@
+﻿@inherits LayoutComponentBase
+
+@* Required *@
+<MudThemeProvider />
+<MudPopoverProvider />
+
+@* Needed for dialogs *@
+<MudDialogProvider />
+
+@* Needed for snackbars *@
+<MudSnackbarProvider />
+
+<div class="page">
+    <main>
+        <article class="content px-4">
+            <CustomErrorBoundary @ref="@ErrorBoundary">
+                @Body
+            </CustomErrorBoundary>
+        </article>
+    </main>
+</div>
+
+@code {
+
+    protected ErrorBoundary? ErrorBoundary;
+
+    protected override void OnParametersSet()
+    {
+        ErrorBoundary?.Recover();
+    }
+
+}
