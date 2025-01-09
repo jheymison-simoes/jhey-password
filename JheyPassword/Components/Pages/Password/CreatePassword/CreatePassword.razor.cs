@@ -5,11 +5,10 @@ using MudBlazor;
 
 namespace JheyPassword.Components.Pages.Password.CreatePassword;
 
-public class CreatePasswordBase : ComponentBase
+public class CreatePasswordBase : BaseComponent
 {
     [Inject] protected ICreatePasswordService CreatePasswordService { get; set; } = default!;
-    [Inject] protected ISnackbar SnackbarService { get; set; } = default!;
-    
+
     protected CreatePasswordForm CreatePasswordForm { get; set; } = new ();
 
     protected async Task OnSubmitAsync()
@@ -19,7 +18,6 @@ public class CreatePasswordBase : ComponentBase
             Title = CreatePasswordForm.Title,
             Password = CreatePasswordForm.Password,
             UserOrEmail = CreatePasswordForm.UserOrEmail
-            
         });
 
         SnackbarService.Add("Chave guardada com sucesso!", Severity.Success);

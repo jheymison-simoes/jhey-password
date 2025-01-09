@@ -1,10 +1,12 @@
 ﻿using JheyPassword.Application.AutoMapper;
 using JheyPassword.Application.Configuration;
+using JheyPassword.Components.Shared;
 using JheyPassword.Data;
 using JheyPassword.Data.Configuration;
 using Microsoft.Extensions.Logging;
 using MudBlazor;
 using MudBlazor.Services;
+using Plugin.Maui.Biometric;
 
 namespace JheyPassword;
 
@@ -21,6 +23,12 @@ public static class MauiProgram
             });
 
         builder.Services.AddMauiBlazorWebView();
+        
+        var defaultImpl = BiometricAuthenticationService.Default;
+        builder.Services.AddSingleton(defaultImpl);
+        
+        InteractiveRenderSettings.ConfigureBlazorHybridRenderModes();
+
         builder.Services.AddMudServices(config => 
         {
             config.SnackbarConfiguration.PositionClass = Defaults.Classes.Position.TopRight;

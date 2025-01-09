@@ -8,6 +8,11 @@ public static class ApplicationDependencyInjection
 {
     public static void AddApplicationDependencies(this IServiceCollection services)
     {
+        //Singleton
+        services.AddScoped<IControlErrorService, ControlErrorService>();
+
         services.AddScoped<ICreatePasswordService, CreatePasswordService>();
+        services.AddScoped<IGetAllPasswordsService, GetAllPasswordsService>();
+        services.AddScoped<IDeletePasswordService, DeletePasswordService>();
     }
 }

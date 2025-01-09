@@ -6,4 +6,6 @@ public interface IPasswordRepository
 {
     Task CreateAsync(PasswordEntity passwordEntity);
     Task<List<PasswordEntity>> GetAllAsync();
+    Task<PasswordEntity?> GetByIdAsync(Guid id);
+    Task DeleteAsync(PasswordEntity passwordEntity);
 }

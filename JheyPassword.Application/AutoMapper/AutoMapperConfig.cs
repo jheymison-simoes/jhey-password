@@ -9,5 +9,8 @@ public class AutoMapperConfig : Profile
     public AutoMapperConfig()
     {
         CreateMap<PasswordEntity, CreatedPasswordResponse>().ReverseMap();
+        CreateMap<PasswordEntity, GetAllPasswordResponse>()
+            .ForMember(dest => dest.UserOrEmail, opt => opt.MapFrom(src => src.User))
+            .ReverseMap();
     }
 }
