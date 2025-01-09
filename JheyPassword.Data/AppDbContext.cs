@@ -1,7 +1,10 @@
-﻿using JheyPassword.Business.Entities;
+﻿using System.Reflection;
+using JheyPassword.Business.Entities;
 using JheyPassword.Data.Mappings;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Maui.Storage;
+using System.IO;
+using Microsoft.Maui.Devices;
 
 namespace JheyPassword.Data;
 
@@ -11,9 +14,42 @@ public class AppDbContext : DbContext
     
     public AppDbContext()
     {
-        _path = Path.Combine(AppContext.BaseDirectory, "app2.db");
+
+        if (DeviceInfo.Platform == DevicePlatform.Android)
+        {
+            _path = Path.Combine(FileSystem.AppDataDirectory, "simple-db.db");
+        }
+        else if (DeviceInfo.Platform == DevicePlatform.iOS)
+        {
+            _path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "..", "Library", "simple-db.db");
+        }
+        else
+        {
+            var fullPath = AppDomain.CurrentDomain.BaseDirectory;
+
+            DirectoryInfo directoryInfo = new DirectoryInfo(fullPath);
+            while (directoryInfo != null && directoryInfo.Name != "JheyPassword")
+            {
+                directoryInfo = directoryInfo.Parent;
+            }
+            
+            _path = Path.Combine(directoryInfo?.FullName ?? string.Empty, "simple-db.db") ;
+        }
+        
+        //_path = Path.GetDirectoryName(Directory.GetCurrentDirectory()) ?? string.Empty;
+        // var fullPath = AppDomain.CurrentDomain.BaseDirectory;
+        //
+        // DirectoryInfo directoryInfo = new DirectoryInfo(fullPath);
+        // while (directoryInfo != null && directoryInfo.Name != "JheyPassword")
+        // {
+        //     directoryInfo = directoryInfo.Parent;
+        // }
+
+
+        // Console.WriteLine($"Diretório do assembly: {assemblyLocation}");
+        // _path = Path.Combine(AppContext., "app2.db");
     }
-    
+
     public DbSet<PasswordEntity> Passwords { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)

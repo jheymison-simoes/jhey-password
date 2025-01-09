@@ -1,0 +1,20 @@
+﻿@page "/"
+@inherits HomeBase
+
+<section class="home-main">
+    @if (IsAuthenticate)
+    {
+        <MudAlert
+            Severity="Severity.Warning">
+            Para continuar é necessário passar pelo processo de biometria
+        </MudAlert>
+        
+        <MudButton
+            Class="mt-3"
+            Color="Color.Primary"
+            Variant="Variant.Filled"
+            OnClick="() => AuthAsync()">
+            TENTAR NOVAMENTE
+        </MudButton>
+    }
+</section>
