@@ -1,0 +1,21 @@
+.nav-item-style {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+::deep .icon-font {
+    font-size: 1.3rem;
+}
+
+.nav-border-bottom {
+    border-bottom: .2rem solid #fff;
+}
+
+@media (width <= 360px) {
+    .nav-item-style {
+        font-size: .7rem;
+    }
+}

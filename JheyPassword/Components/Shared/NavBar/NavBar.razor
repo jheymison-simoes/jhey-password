@@ -1,0 +1,15 @@
+﻿@inherits NavBarBase
+
+<MudAppBar Bottom="true" Fixed="true" Color="Color.Primary" Elevation="1">
+    <div class="row w-100" >
+        @foreach (var item in Items ?? new())
+        {
+            <div class="col-4 text-center">
+                <section class="nav-item-style py-1 @(item.Active ? "nav-border-bottom" : "")" @onclick="() => RedirectTo(item.RedirecTo)">
+                    <MudIcon Icon="@item.Icon" Title="Favorite" />
+                    <span class="text-center small">@item.Description</span>
+                </section>
+            </div>
+        }
+    </div>
+</MudAppBar>

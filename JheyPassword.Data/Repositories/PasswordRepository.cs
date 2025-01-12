@@ -12,6 +12,12 @@ public class PasswordRepository(AppDbContext db) : IPasswordRepository, IDisposa
         await db.SaveChangesAsync();
     }
     
+    public async Task CreateAsync(List<PasswordEntity> passwordEntity)
+    {
+        await db.Passwords.AddRangeAsync(passwordEntity);
+        await db.SaveChangesAsync();
+    }
+    
     public async Task<List<PasswordEntity>> GetAllAsync()
     {
         return await db.Passwords.ToListAsync();

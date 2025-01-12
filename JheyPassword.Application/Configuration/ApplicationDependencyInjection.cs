@@ -14,5 +14,6 @@ public static class ApplicationDependencyInjection
         services.AddScoped<ICreatePasswordService, CreatePasswordService>();
         services.AddScoped<IGetAllPasswordsService, GetAllPasswordsService>();
         services.AddScoped<IDeletePasswordService, DeletePasswordService>();
+        services.AddScoped<IImportExportDataService, ImportExportDataService>();
     }
 }

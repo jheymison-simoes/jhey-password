@@ -1,4 +1,5 @@
-﻿@inherits LayoutComponentBase
+﻿@using JheyPassword.Components.Shared.NavBar
+@inherits LayoutComponentBase
 
 @* Required *@
 <MudThemeProvider />
@@ -16,6 +17,8 @@
             <CustomErrorBoundary @ref="@ErrorBoundary">
                 @Body
             </CustomErrorBoundary>
+
+            <NavBar />
         </article>
     </main>
 </div>
